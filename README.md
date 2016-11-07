@@ -9,4 +9,5 @@ No Dues Portal Project for System Software Lab at IITG
 5. $ composer update --no-scripts
 6. $ cp .env.example .env
 7. check by $ php srtisan serve
+8. Recommend to use PHP Storm, get License using webmail id. (https://www.jetbrains.com/student/ , https://www.jetbrains.com/phpstorm/)
 
