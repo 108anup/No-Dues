@@ -1,3 +1,6 @@
+# Temp Files
+*~
+
 vendor/
 node_modules/
 
@@ -13,6 +16,3 @@ bootstrap/cache/
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
-
-# Temp Files
-*~
