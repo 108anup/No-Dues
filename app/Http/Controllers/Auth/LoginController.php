@@ -46,7 +46,8 @@ class LoginController extends Controller
         if($user->role === 'student') {
             //passing the user which is a student
            // return view($view_for_student,compact('user'));
-            //return $user;
+            return $user;
+
         }
         else if($user->role==='supervisor'){
             $prof_mail=$user->email;
