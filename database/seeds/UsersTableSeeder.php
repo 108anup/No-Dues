@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,44 +12,28 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-    	$user=new User;
-    	$user->name='Ritveeka';
-    	$user->email='ritveeka@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-    	$user->role='student';
-    	$user->rel_id=1;
-    	$user->save();
+		DB::table('users')->insert([
+			'email' => 'suhas.kantekar@iitg.ernet.in',
+			'type' => 'student',
+			'password' => bcrypt('secret'),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
 
-    	$user=new User;
-    	$user->name='P K Das';
-    	$user->email='pkdas@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-    	$user->role='supervisor';
-    	$user->rel_id=1;
-    	$user->save();
+		DB::table('users')->insert([
+			'email' => 'pkdas@iitg.ernet.in',
+			'type' => 'staff',
+			'password' => bcrypt('secret'),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
 
-    	$user=new User;
-    	$user->name='P K Das';
-    	$user->email='pkdas@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-    	$user->role='hod';
-    	$user->rel_id=1;
-    	$user->save();
-
-    	$user=new User;
-    	$user->name='P K Das';
-    	$user->email='pkdas@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-    	$user->role='warden';
-    	$user->rel_id=1;
-    	$user->save();
-    	
-    	$user=new User;
-    	$user->name='a k gupta';
-    	$user->email='gupta@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-    	$user->role='registrar';
-    	$user->rel_id=2;
-    	$user->save();    
+		DB::table('users')->insert([
+			'email' => 'gupta@iitg.ernet.in',
+			'type' => 'staff',
+			'password' => bcrypt('secret'),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\;
+use App\Student;
 
 class StudentTableSeeder extends Seeder
 {
@@ -12,13 +12,15 @@ class StudentTableSeeder extends Seeder
      */
     public function run()
     {
-    	$user=new Student;
-    	$user->name='Ritveeka';
-    	$user->email='ritveeka@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-        $user->dept='cse';
-        $user->hostel='dhansiri';
-        $user->staff_id='staff_id';
-    	$user->save();    
+
+        DB::table('student')->insert([
+            'name' => 'Suhas Kantekar',
+            'email' => 'suhas.kantekar@iitg.ernet.in',
+            'dept' => 'cse',
+            'hostel' => 'barak',
+            'superviser_email' => 'pkdas@iitg.ernet.in',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ]);
     }
 }

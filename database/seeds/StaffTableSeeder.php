@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\;
+use App\Staff;
 
 class StaffTableSeeder extends Seeder
 {
@@ -12,19 +12,26 @@ class StaffTableSeeder extends Seeder
      */
     public function run()
     {
-    	$user=new Staff;
-    	$user->name='P K Das';
-    	$user->email='pkdas@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-    	$user->hostel='dhansiri';
-    	$user->dept='cse';
-    	$user->save();
-    	$user=new Staff;
-    	$user->name='a k gupta';
-    	$user->email='gupta@iitg.ernet.in';
-    	$user->password=bcrypt('secret');
-    	$user->dept='sa';
-    	$user->hostel='none';
-    	$user->save();  
+		$role1 = ['superviser','hod','warden'];
+		$role2 = ['registrar'];
+		DB::table('staff')->insert([
+			'name' => 'P K Das',
+			'email' => 'pkdas@iitg.ernet.in',
+			'dept' => 'cse',
+			'hostel' => 'dhansiri',
+			'role' => json_encode($role1),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
+
+		DB::table('staff')->insert([
+			'name' => 'a k gupta',
+			'email' => 'gupta@iitg.ernet.in',
+			'dept' => 'sa',
+			'hostel' => 'none',
+			'role' => json_encode($role2),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
     }
 }

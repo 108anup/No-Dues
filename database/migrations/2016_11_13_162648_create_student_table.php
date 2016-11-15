@@ -17,10 +17,10 @@ class CreateStudentTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->string('password');
             $table->string('hostel');
             $table->string('dept');
-            $table->integer('staff_id');
+            $table->string('superviser_email');
+            //Add Dues
             $table->timestamps();
         });
     }
