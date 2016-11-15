@@ -12,7 +12,7 @@ class StudentTableSeeder extends Seeder
      */
     public function run()
     {
-
+        //TODO:: Suhas Add Dues
         DB::table('student')->insert([
             'name' => 'Suhas Kantekar',
             'email' => 'suhas.kantekar@iitg.ernet.in',

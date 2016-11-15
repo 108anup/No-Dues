@@ -27,13 +27,13 @@ class LoginController extends Controller
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required', 'password' => 'required','role' => 'required',
+            $this->username() => 'required', 'password' => 'required','type' => 'required',
         ]);
     }
 
     protected function credentials(Request $request)
     {
-        return $request->only($this->username(), 'password','role');
+        return $request->only($this->username(), 'password','type');
     }
 
 

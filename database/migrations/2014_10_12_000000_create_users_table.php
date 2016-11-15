@@ -18,6 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('type');
             $table->string('password');
+
+            //TODO:: Suhas Add Dues
+
             $table->rememberToken();
             $table->timestamps();
         });
