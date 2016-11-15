@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function status(){
         $user = \Auth::user();
-        $email=$user->email;
+        $email = $user->email;
         $type = $user->type;
 
         if($type === 'student') {
@@ -64,45 +64,25 @@ class HomeController extends Controller
             return NULL;
         }
 
-        $students = Student::all();
-
         if($role === 'superviser'){
-            $prof=Staff::where('email','=',$email)->get();
-            $selection = collect();
-            foreach($students as $student){
-                if($student->superviser_email === $email){
-                    $selection.push($student);
-                }
-            }
-            return $selection;
-        }
-
-
-        //TODO:: Ritveeka
-        //Do Others Similarly
-
-        else if($user->role==='warden'){
-            $prof=Staff::where('email','=',$email)->get();
-            //in model 'Staff' implement 'hostel_student' method which returns all students under him/her as guide using appropriate foreign_key and primary_key
-            $student=$prof->hostel_student();
+            $student = $prof->students;            
             return view($view_for_staff,compact('student'));
         }
-        else if($user->role==='caretaker'){
-            $prof=Staff::where('email','=',$email)->get();
-            //in model 'Staff' implement 'hostel_student' method which returns all students under him/her as guide using appropriate foreign_key and primary_key
-            $student=$prof->hostel_student();
+
+        else if($role === 'warden' || $role==='caretaker'){
+            $hostel = $prof->hostel;
+            $student=Student::where('hostel','=',$hostel)->get();
             return view($view_for_staff,compact('student'));
         }
-        else if($user->role==='hod' || $user->role==='dept_lib_head'){
-            $prof=Staff::where('email','=',$email)->get();
+
+        else if($role==='hod' || $role==='dept_lib_head'){
             $prof_dept=$prof->dept;
-            //in model 'Staff' implement 'hostel_student' method which returns all students under him/her as guide using appropriate foreign_key and primary_key
             $student=Student::where('dept','=',$prof_dept)->get();
             return view($view_for_staff,compact('student'));
         }
-
-        //for others "cc,library,F&A,registrar,workshop.student Affairs"
-        //  return view($view_for_staff,compact('student'));
+        
+        //for other non-specific roles return whole database of students
+        return view($view_for_staff,compact('student'));
 
     }
 }
