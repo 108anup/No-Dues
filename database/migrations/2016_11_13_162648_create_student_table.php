@@ -19,7 +19,7 @@ class CreateStudentTable extends Migration
             $table->string('email');
             $table->string('hostel');
             $table->string('dept');
-            $table->int('superviser_id');
+            $table->integer('superviser_id');
             //Add Dues
             $table->timestamps();
         });
