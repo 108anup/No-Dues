@@ -37,15 +37,15 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">role</label>
+                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                            <label for="type" class="col-md-4 control-label">Account Type:</label>
 
                             <div class="col-md-6">
-                                <input id="role" type="role" class="form-control" name="role" required>
+                                <input id="type" type="type" class="form-control" name="type" required>
 
-                                @if ($errors->has('role'))
+                                @if ($errors->has('type'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
+                                        <strong>{{ $errors->first('type') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -29,7 +29,7 @@ class StudentTableSeeder extends Seeder
             'asst_registrar' => false,
             'hod' => false,
             'account' => false,
-            'superviser_email' => 'pkdas@iitg.ernet.in',
+            'superviser_id' => 1,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);

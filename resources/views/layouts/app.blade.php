@@ -10,6 +10,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    @yield('header')
+
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
@@ -80,7 +82,7 @@
 
         @yield('content')
     </div>
-
+    @yield('footer')
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>
