@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('header')
+@section('scripts')
     <link rel="stylesheet" type="text/css" href="{{ asset('datatables/datatables.css') }}"/>
 
     <script type="text/javascript" src="{{ asset('datatables/datatables.js') }}"></script>

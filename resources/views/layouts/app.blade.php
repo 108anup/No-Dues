@@ -10,8 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @yield('header')
-
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
@@ -21,6 +19,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+
 </head>
 <body>
     <div id="app">
@@ -57,7 +56,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->email }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
@@ -82,6 +81,7 @@
 
         @yield('content')
     </div>
+    @yield('scripts')
     @yield('footer')
     <!-- Scripts -->
     <script src="/js/app.js"></script>
