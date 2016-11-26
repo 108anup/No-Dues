@@ -41,7 +41,9 @@
                             <label for="type" class="col-md-4 control-label">Account Type:</label>
 
                             <div class="col-md-6">
-                                <input id="type" type="type" class="form-control" name="type" required>
+                                {{--<input id="type" type="type" class="form-control" name="type" required>--}}
+                                <label class="radio-inline"><input type="radio" name="type" value="staff">Staff</label>
+                                <label class="radio-inline"><input type="radio" name="type" value="student">Student</label>
 
                                 @if ($errors->has('type'))
                                     <span class="help-block">
@@ -50,6 +52,7 @@
                                 @endif
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

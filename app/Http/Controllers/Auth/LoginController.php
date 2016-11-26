@@ -36,13 +36,18 @@ class LoginController extends Controller
         return $request->only($this->username(), 'password','type');
     }
 
+//    protected function sendLoginResponse(Request $request)
+//    {
+//        return redirect('dash');
+//    }
+
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dash';
 
     /**
      * Create a new controller instance.

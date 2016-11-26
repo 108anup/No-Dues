@@ -39,11 +39,29 @@ class HomeController extends Controller
         }
         else if($type === 'staff'){
 
-            $prof=Staff::where('email','=',$email)->get();
-            $roles = json_decode($prof->role);
+            $prof=Staff::where('email','=',$email)->first();
+            $roles = json_decode($prof->purpose);
 
             return view('staff_status',compact('roles'));
         }
     }
+
+    public function dash()
+    {
+        if(Auth()->check()) {
+            $user = \Auth::User();
+            $email = $user->email;
+            if ($user->type == 'staff') {
+
+                $prof=Staff::where('email','=',$email)->first();
+                $roles = json_decode($prof->purpose);
+                return view('dash.staff',['roles' => $roles]);
+
+            } else if ($user->type == 'student') {
+                return view('dash.student');
+            }
+        }
+    }
+
 
 }
