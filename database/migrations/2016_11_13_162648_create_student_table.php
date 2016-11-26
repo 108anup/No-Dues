@@ -20,8 +20,18 @@ class CreateStudentTable extends Migration
             $table->string('hostel');
             $table->string('dept');
             $table->integer('superviser_id');
-            //Add Dues
             $table->timestamps();
+            $table->boolean('care_taker');
+            $table->boolean('gymkhana');
+            $table->boolean('submit_thesis');
+            $table->boolean('online_no_dues_for_cc');
+            $table->boolean('deptno_due_and_workshop');
+            $table->boolean('warden');
+            $table->boolean('library');
+            $table->boolean('cc_in_charge');
+            $table->boolean('asst_registrar');
+            $table->boolean('hod');
+            $table->boolean('account');
         });
     }
 
