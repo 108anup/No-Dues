@@ -19,7 +19,7 @@ class CreateStaffTable extends Migration
             $table->string('email');
             $table->string('hostel');
             $table->string('dept');
-            $table->string('role');
+            $table->string('purpose');
             $table->timestamps();
         });
     }

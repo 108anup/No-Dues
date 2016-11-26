@@ -35,5 +35,37 @@ class UsersTableSeeder extends Seeder
 			'created_at' => date("Y-m-d H:i:s"),
 			'updated_at' => date("Y-m-d H:i:s"),
 		]);
+
+		DB::table('users')->insert([
+			'email' => 'library@iitg.ernet.in',
+			'type' => 'staff',
+			'password' => bcrypt('secret'),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
+
+		DB::table('users')->insert([
+			'email' => 'dummy1@iitg.ernet.in',
+			'type' => 'staff',
+			'password' => bcrypt('secret'),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
+
+		DB::table('users')->insert([
+			'email' => 'dummy2@iitg.ernet.in',
+			'type' => 'staff',
+			'password' => bcrypt('secret'),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
+
+		DB::table('users')->insert([
+			'email' => 'dummy3@iitg.ernet.in',
+			'type' => 'staff',
+			'password' => bcrypt('secret'),
+			'created_at' => date("Y-m-d H:i:s"),
+			'updated_at' => date("Y-m-d H:i:s"),
+		]);
     }
 }

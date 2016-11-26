@@ -20,6 +20,10 @@
         ]); ?>
     </script>
 
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    @yield('scripts')
+
 </head>
 <body>
     <div id="app">
@@ -81,9 +85,6 @@
 
         @yield('content')
     </div>
-    @yield('scripts')
     @yield('footer')
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
 </body>
 </html>

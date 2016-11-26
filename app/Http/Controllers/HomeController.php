@@ -46,43 +46,4 @@ class HomeController extends Controller
         }
     }
 
-    public function getData(Request $request){
-
-        $user = \Auth::user();
-        $email=$user->email;
-        $type = $user->type;
-        $role = $request->input('role');
-
-        if($type==='student'){
-            return NULL;
-        }
-
-        $prof=Staff::where('email','=',$email)->get();
-        $roles = json_decode($prof->role);
-
-        if (!in_array($role, $roles)) {
-            return NULL;
-        }
-
-        if($role === 'superviser'){
-            $student = $prof->students;            
-            return view($view_for_staff,compact('student'));
-        }
-
-        else if($role === 'warden' || $role==='caretaker'){
-            $hostel = $prof->hostel;
-            $student=Student::where('hostel','=',$hostel)->get();
-            return view($view_for_staff,compact('student'));
-        }
-
-        else if($role==='hod' || $role==='dept_lib_head'){
-            $prof_dept=$prof->dept;
-            $student=Student::where('dept','=',$prof_dept)->get();
-            return view($view_for_staff,compact('student'));
-        }
-        
-        //for other non-specific roles return whole database of students
-        return view($view_for_staff,compact('student'));
-
-    }
 }

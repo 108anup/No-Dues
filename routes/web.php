@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+//Route::controller('datatables', 'DatatablesController', [
+//    'anyData'  => 'datatables.data',
+//    'getIndex' => 'datatables',
+//]);
+
+
+Route::get('datatables/anyData', 'DatatablesController@anyData');
+Route::get('datatables/getData', 'DatatablesController@getData');
+Route::get('datatables', 'DatatablesController@getIndex');
