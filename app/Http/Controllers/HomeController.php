@@ -43,20 +43,38 @@ class HomeController extends Controller
 
             } else if ($user->type == 'student') {
                 $student=Student::where('email','=',$email)->first();
+                $branch_prof = Staff::where('dept','=',$student->dept);
+
+                //Todo:: Ritveeka
+                //Get Status from 3rd table using all branch profs ids and Student id
+
                 return view('dash.student',['student'=>$student]);
             }
         }
     }
 
     public function update(Request $request){
+
         $purpose = $request->input('purpose');
         $rows = $request->input('ids');
         $status = $request->input('status');
 
-        foreach($rows as $row){
-            $student=Student::where('id','=',(int)$row)->first();
-            $student["$purpose"] = $status;
-            $student->save();
+        if($purpose == "prof"){
+            $user = \Auth::User();
+            $email = $user->email();
+            $prof = Staff::where('email','=',$email)->first;
+            $prof_id = $prof->id;
+
+            //Todo:: Ritveeka:
+            //Update the 3rd Table using rows (Array of Student Ids)
+        }
+        else {
+
+            foreach ($rows as $row) {
+                $student = Student::where('id', '=', (int)$row)->first();
+                $student["$purpose"] = $status;
+                $student->save();
+            }
         }
         return 1;
     }
