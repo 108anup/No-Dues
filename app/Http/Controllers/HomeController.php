@@ -78,12 +78,29 @@ class HomeController extends Controller
 
         if($purpose == "prof"){
             $user = \Auth::User();
-            $email = $user->email();
-            $prof = Staff::where('email','=',$email)->first;
-            $prof_id = $prof->id;
+            $email = $user->email;
+            $prof = Staff::where('email','=',$email)->first();
 
-            //Todo:: Ritveeka:
-            //Update the 3rd Table using rows (Array of Student Ids)
+            foreach($rows as $row){
+
+                $res = Dept_Prof_Status::where([
+                    ['stud_id', '=', $row],
+                    ['prof_id', '=', $prof->id]
+                ])->first();
+
+                if(count($res)){
+                    $rec = $res->first();
+                    $rec->status = $status;
+                    $rec->save();
+                }
+                else{
+                    $rec = new Dept_Prof_Status();
+                    $rec["stud_id"] = $row;
+                    $rec["prof_id"] = $prof->id;
+                    $rec["status"] = $status;
+                    $rec->save();
+                }
+            }
         }
         else {
 

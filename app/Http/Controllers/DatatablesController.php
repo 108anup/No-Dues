@@ -8,6 +8,7 @@ use App\User;
 use Yajra\Datatables\Datatables;
 use App\Student;
 use App\Staff;
+use App\Dept_Prof_Status;
 
 class DatatablesController extends Controller
 {
@@ -54,24 +55,45 @@ class DatatablesController extends Controller
 
         if($role === 'superviser'){
             $student = $prof->students;
-            return Datatables::of($student)->make(true);
         }
 
         else if($role === 'warden' || $role==='caretaker'){
             $hostel = $prof->hostel;
             $student=Student::where('hostel','=',$hostel)->get();
-            return Datatables::of($student)->make(true);
         }
 
         else if($role==='hod' || $role==='dept_lib_head'){
 
             $prof_dept=$prof->dept;
             $student=Student::where('dept','=',$prof_dept)->get();
-            return Datatables::of($student)->make(true);
+        }
+        else if($role==='prof'){
+
+            $prof_dept=$prof->dept;
+            $student=Student::where('dept','=',$prof_dept)->get();
+            foreach($student as $stud){
+                $res = Dept_Prof_Status::where([
+                    ['stud_id', '=', $stud->id],
+                    ['prof_id', '=', $prof->id]
+                ])->first();
+                $stat = "Due";
+                if(count($res)){
+                    $stat = $res->first()->status;
+                }
+                $stud["dept_prof"] = $stat;
+            }
+        }
+        else {
+            $student = Student::All();
+            //for other non-specific roles return whole database of students
         }
 
-        $student = Student::All();
-        //for other non-specific roles return whole database of students
+        foreach($student as $stud){
+            if(!isset($stud["dept_prof"])){
+                $stud["dept_prof"] = "NA";
+            }
+        }
+
         return Datatables::of($student)->make(true);
 
     }

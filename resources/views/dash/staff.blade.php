@@ -77,6 +77,7 @@
                                 <th>Registrar</th>
                                 <th>HOD</th>
                                 <th>Account</th>
+                                <th>Department Prof</th>
                             </tr>
                             </thead>
                             <tfoot>
@@ -96,6 +97,7 @@
                                 <th>Registrar</th>
                                 <th>HOD</th>
                                 <th>Account</th>
+                                <th>Department Prof</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -119,7 +121,7 @@
                 return purpose;
             }
             function updateCols(){
-                for ( var i=5 ; i<15 ; i++ ) {
+                for ( var i=5 ; i<=15 ; i++ ) {
                     table.column( i ).visible( false, false );
                 }
                 table.columns.adjust().draw( false );
@@ -153,6 +155,9 @@
                 }
                 if(purpose == 'account'){
                     table.column(14).visible( true, true );
+                }
+                if(purpose == 'prof'){
+                    table.column(15).visible( true, true );
                 }
             }
 
@@ -202,6 +207,7 @@
                     { data: 'asst_registrar', name: 'asst_registrar' },
                     { data: 'hod', name: 'hod' },
                     { data: 'account', name: 'account' },
+                    { data: 'dept_prof', name: 'dept_prof' },
                 ],
                 select: true,
                 buttons: [
@@ -256,30 +262,6 @@
                 console.log(ids);
                 updateAjax(flag,ids);
             });
-
-            table.columns( '.select-filter' ).every( function () {
-                var that = this;
-
-                // Create the select list and search operation
-                var select = $('<select />')
-                        .appendTo(
-                                this.footer()
-                        )
-                        .on( 'change', function () {
-                            that
-                                    .search( $(this).val() )
-                                    .draw();
-                        } );
-
-                // Get the search data for the first column and add to the select list
-                this
-                        .cache( 'search' )
-                        .sort()
-                        .unique()
-                        .each( function ( d ) {
-                            select.append( $('<option value="'+d+'">'+d+'</option>') );
-                        } );
-            } );
         });
 
     </script>
