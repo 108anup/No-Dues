@@ -12,10 +12,11 @@ class StaffTableSeeder extends Seeder
      */
     public function run()
     {
-		$role1 = ['superviser','hod','warden'];
+		$role1 = ['superviser','warden'];
 		$role2 = ['registrar', 'warden'];
 		$role3 = ['library'];
 		$role_dept_prof = ['prof'];
+		$saradhi_sir = ['hod','prof','warden'];
 
 		DB::table('staff')->insert([
 			'name' => 'P K Das',
@@ -321,8 +322,8 @@ class StaffTableSeeder extends Seeder
 			'name' => 'V. Vijaya Saradhi',
 			'email' => 'V.VijayaSaradhi@iitg.ernet.in',
 			'dept' => 'Computer Science and Engineering',
-			'hostel' => '',
-			'purpose' => json_encode($role_dept_prof),
+			'hostel' => 'Barak',
+			'purpose' => json_encode($saradhi_sir),
 			'created_at' => date("Y-m-d H:i:s"),
 			'updated_at' => date("Y-m-d H:i:s"),
 		]);

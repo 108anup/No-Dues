@@ -60,6 +60,22 @@
                                 }
                                 ?>
                         </table>
+                        Department Professors:
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                            </tr>
+                            <?php
+                            foreach ($dept_profs as $dp) {
+                                echo "<tr>";
+                                echo "<td>".$dp["name"]."</td>";
+                                echo '<td>'.$dp["status"],'</td>';
+                                echo "</tr>";
+                            }
+                            ?>
+                        </table>
+
                     </div>
                 </div>
             </div>

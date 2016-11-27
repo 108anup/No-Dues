@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Student;
 use App\User;
 use App\Staff;
+use App\Dept_Prof_Status;
 
 class HomeController extends Controller
 {
@@ -43,12 +44,28 @@ class HomeController extends Controller
 
             } else if ($user->type == 'student') {
                 $student=Student::where('email','=',$email)->first();
-                $branch_prof = Staff::where('dept','=',$student->dept);
+                $branch_prof = Staff::where('dept',$student->dept)->get();
+                $stud = array();
 
-                //Todo:: Ritveeka
-                //Get Status from 3rd table using all branch profs ids and Student id
+                foreach($branch_prof as $p){
 
-                return view('dash.student',['student'=>$student]);
+                    $res = Dept_Prof_Status::where([
+                        ['stud_id', '=', $student->id],
+                        ['prof_id', '=', $p->id]
+                    ])->first();
+
+                    $stat = "Due";
+                    if(count($res)){
+                        $stat = $res->first()->status;
+                    }
+
+                    $rec['name'] = $p->name;
+                    $rec['status'] = $stat;
+                    array_push($stud,$rec);
+                }
+                //return json_encode($stud);
+
+                return view('dash.student',['student'=>$student, 'dept_profs'=>$stud]);
             }
         }
     }
