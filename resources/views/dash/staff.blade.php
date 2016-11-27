@@ -256,6 +256,30 @@
                 console.log(ids);
                 updateAjax(flag,ids);
             });
+
+            table.columns( '.select-filter' ).every( function () {
+                var that = this;
+
+                // Create the select list and search operation
+                var select = $('<select />')
+                        .appendTo(
+                                this.footer()
+                        )
+                        .on( 'change', function () {
+                            that
+                                    .search( $(this).val() )
+                                    .draw();
+                        } );
+
+                // Get the search data for the first column and add to the select list
+                this
+                        .cache( 'search' )
+                        .sort()
+                        .unique()
+                        .each( function ( d ) {
+                            select.append( $('<option value="'+d+'">'+d+'</option>') );
+                        } );
+            } );
         });
 
     </script>

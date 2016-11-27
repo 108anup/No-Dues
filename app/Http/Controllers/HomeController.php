@@ -30,23 +30,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function status(){
-        $user = \Auth::user();
-        $email = $user->email;
-        $type = $user->type;
-
-        if($type === 'student') {
-            return view('stud_status',compact('user'));
-        }
-        else if($type === 'staff'){
-
-            $prof=Staff::where('email','=',$email)->first();
-            $roles = json_decode($prof->purpose);
-
-            return view('staff_status',compact('roles'));
-        }
-    }
-
     public function dash()
     {
         if(Auth()->check()) {
@@ -59,7 +42,8 @@ class HomeController extends Controller
                 return view('dash.staff',['roles' => $roles]);
 
             } else if ($user->type == 'student') {
-                return view('dash.student');
+                $student=Student::where('email','=',$email)->first();
+                return view('dash.student',['student'=>$student]);
             }
         }
     }
