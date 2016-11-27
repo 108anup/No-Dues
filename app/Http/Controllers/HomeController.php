@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Student;
 use App\User;
 use App\Staff;
@@ -61,6 +62,19 @@ class HomeController extends Controller
                 return view('dash.student');
             }
         }
+    }
+
+    public function update(Request $request){
+        $purpose = $request->input('purpose');
+        $rows = $request->input('ids');
+        $status = $request->input('status');
+
+        foreach($rows as $row){
+            $student=Student::where('id','=',(int)$row)->first();
+            $student["$purpose"] = $status;
+            $student->save();
+        }
+        return 1;
     }
 
 

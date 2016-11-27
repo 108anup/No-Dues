@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('datatables_full/datatables.min.css') }}"/>
     <script type="text/javascript" src="{{ asset('datatables_full/datatables.min.js') }}"></script>
 
+
     {{--Local Incomplete--}}
 
     {{--<link rel="stylesheet" type="text/css" href="{{ asset('datatables/datatables.min.css') }}"/>--}}
@@ -55,7 +56,10 @@
                             </select>
                         </div>
 
-                        <table class="table table-bordered" id="users-table">
+                        <button id="customFlagbtn">Set Custom Flag</button>
+                        <input id="customFlag" type="text" placeholder="Enter Flag" name="CustomFlag"/>
+
+                        <table class="table table-bordered" id="students-table">
                             <thead>
                             <tr>
                                 <th>Id</th>
@@ -65,7 +69,7 @@
                                 <th>Dept</th>
                                 <th>CareTaker</th>
                                 <th>Gymkhana</th>
-                                <th>Thesis</th>
+                                <th>Superviser</th>
                                 <th>CC</th>
                                 <th>Workshop</th>
                                 <th>Warden</th>
@@ -75,7 +79,28 @@
                                 <th>Account</th>
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Hostel</th>
+                                <th>Dept</th>
+                                <th>CareTaker</th>
+                                <th>Gymkhana</th>
+                                <th>Superviser</th>
+                                <th>CC</th>
+                                <th>Workshop</th>
+                                <th>Warden</th>
+                                <th>Library</th>
+                                <th>Registrar</th>
+                                <th>HOD</th>
+                                <th>Account</th>
+                            </tr>
+                            </tfoot>
                         </table>
+
+                        {{--<button id="ClearDues">Clear Dues</button>--}}
 
 
                     </div>
@@ -88,6 +113,7 @@
     <script>
         $(function() {
             var purpose = "{{$roles[0]}}";
+            var table;
             function getPurpose(){
                  console.log(purpose);
                 return purpose;
@@ -130,7 +156,26 @@
                 }
             }
 
-            var table = $('#users-table').DataTable({
+            function updateAjax(clear, ids){
+                $.ajax({
+                    url: 'submit',
+                    data: {
+                        purpose: purpose,
+                        ids: ids,
+                        status: clear,
+                    }
+                }).done(function (data) {
+                    if (data == 1) {
+                        table.ajax.reload();
+                    }
+                    else {
+                        alert("There was some problem with submission. Please refresh and try again or contact the invigilator.")
+                    }
+                });
+            }
+
+            table = $('#students-table').DataTable({
+                dom: 'Bfrtip',
                 scrollX: true,
                 processing: true,
                 serverSide: true,
@@ -149,7 +194,7 @@
                     { data: 'dept', name: 'dept' },
                     { data: 'care_taker', name: 'care_taker' },
                     { data: 'gymkhana', name: 'gymkhana' },
-                    { data: 'submit_thesis', name: 'submit_thesis' },
+                    { data: 'superviser', name: 'superviser' },
                     { data: 'online_no_dues_for_cc', name: 'online_no_dues_for_cc' },
                     { data: 'deptno_due_and_workshop', name: 'deptno_due_and_workshop' },
                     { data: 'warden', name: 'warden' },
@@ -159,6 +204,32 @@
                     { data: 'account', name: 'account' },
                 ],
                 select: true,
+                buttons: [
+                    {
+                        text: 'Clear Dues',
+                        action: function () {
+                            //var rows = table.rows( { selected: true } );
+                            var ids = $.map(table.rows('.selected').data(), function (item) {
+                                return item.id;
+                            });
+
+                            console.log(ids);
+                            updateAjax("Clear", ids);
+                        }
+                    },
+                    {
+                        text: 'UnClear Dues',
+                        action: function () {
+                            //var rows = table.rows( { selected: true } );
+                            var ids = $.map(table.rows('.selected').data(), function (item) {
+                                return item.id;
+                            });
+
+                            console.log(ids);
+                            updateAjax("Due",ids);
+                        }
+                    },
+                ],
             });
 
             updateCols();
@@ -172,6 +243,19 @@
                 updateCols();
             });
 
+            $('#customFlagbtn').click(function SetCustomFlag() {
+
+                var flag = $('#customFlag').val();
+                console.log(flag, "Flag");
+
+                //var rows = table.rows( { selected: true } );
+                var ids = $.map(table.rows('.selected').data(), function (item) {
+                    return item.id;
+                });
+
+                console.log(ids);
+                updateAjax(flag,ids);
+            });
         });
 
     </script>

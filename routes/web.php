@@ -29,3 +29,4 @@ Route::get('datatables/anyData', 'DatatablesController@anyData');
 Route::get('datatables/getData', 'DatatablesController@getData');
 Route::get('datatables', 'DatatablesController@getIndex');
 Route::get('dash', 'HomeController@dash');
+Route::any('submit', 'HomeController@update');
