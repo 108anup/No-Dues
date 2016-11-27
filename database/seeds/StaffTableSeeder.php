@@ -16,7 +16,7 @@ class StaffTableSeeder extends Seeder
 		$role2 = ['registrar', 'warden'];
 		$role3 = ['library'];
 		$role_dept_prof = ['prof'];
-		$saradhi_sir = ['hod','prof','warden'];
+		$saradhi_sir = ['prof','warden','hod'];
 
 		DB::table('staff')->insert([
 			'name' => 'P K Das',

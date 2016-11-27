@@ -62,10 +62,33 @@ class DatatablesController extends Controller
             $student=Student::where('hostel','=',$hostel)->get();
         }
 
-        else if($role==='hod' || $role==='dept_lib_head'){
+        else if($role==='dept_lib_head'){
 
             $prof_dept=$prof->dept;
             $student=Student::where('dept','=',$prof_dept)->get();
+        }
+        else if($role ==="hod"){
+            $prof_dept=$prof->dept;
+            $branch_prof = Staff::where('dept',$prof_dept)->get();
+            $stud = Student::where('dept',$prof_dept)->get();
+            $student = array();
+            $flag = true;
+            foreach($stud as $s){
+                foreach($branch_prof as $p){
+                    $res = Dept_Prof_Status::where([
+                        ['stud_id', '=', $s->id],
+                        ['prof_id', '=', $p->id]
+                    ])->first();
+
+                    if (!$res) {
+                        $flag = false;
+                    }
+                }
+                if($flag) {
+                    array_push($student, $s);
+                }
+            }
+            $student = collect($student);
         }
         else if($role==='prof'){
 
